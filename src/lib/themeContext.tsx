@@ -5,6 +5,7 @@ import { ThemeConfig, DEFAULT_THEME, validateThemeConfig, generateThemeClasses }
 
 const ThemeContext = createContext<{
   theme: ThemeConfig;
+  isLoaded: boolean;
   setAccent: (accent: string) => void;
   setBackground: (background: string) => void;
   setFont: (font: string) => void;
@@ -12,6 +13,7 @@ const ThemeContext = createContext<{
   updateTheme: (updates: Partial<ThemeConfig>) => void;
 }>({
   theme: DEFAULT_THEME,
+  isLoaded: false,
   setAccent: () => {},
   setBackground: () => {},
   setFont: () => {},
@@ -21,12 +23,14 @@ const ThemeContext = createContext<{
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState(DEFAULT_THEME);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setTheme(validateThemeConfig(JSON.parse(savedTheme)));
     }
+    setIsLoaded(true);
   }, []);
 
   const updateTheme = (updates: Partial<ThemeConfig>) => {
@@ -43,7 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleMode = () => updateTheme({ mode: theme.mode === "dark" ? "light" : "dark" });
 
   return (
-    <ThemeContext.Provider value={{ theme, setAccent, setBackground, setFont, toggleMode, updateTheme }}>
+    <ThemeContext.Provider value={{ theme, isLoaded, setAccent, setBackground, setFont, toggleMode, updateTheme }}>
       {children}
     </ThemeContext.Provider>
   );
