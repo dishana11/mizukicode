@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme } from './hooks/useTheme';
+import { useTheme } from '@/lib/themeContext'; // Updated to match Hero.tsx
 import { ThemeToggle } from './components/ThemeToggle';
 import { Loading } from './components/ui/Loading';
 import { Navigation } from './components/Navigation';
-import { Hero } from './components/Hero';
+import Hero from './components/Hero'; // Fixed default import
 import { CourseGrid } from './components/CourseGrid';
 import { CoursePage } from './components/CoursePage';
 import { Footer } from './components/Footer';
@@ -210,7 +210,6 @@ function App() {
     }, 300);
   };
 
-  // Show loading screen while theme is loading
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -221,18 +220,13 @@ function App() {
 
   return (
     <div className={`min-h-screen text-white overflow-x-hidden relative theme-transition ${theme.background === 'gradient' ? 'bg-gradient-theme' : 'bg-minimal-theme'}`}>
-      {/* Theme Settings */}
       <ThemeToggle />
-
-      {/* Page Transition Overlay */}
       {isTransitioning && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center">
           <Loading size="lg" />
         </div>
       )}
-
       <Navigation currentPage={currentPage} onNavigate={handleBackToHome} />
-
       <main className="relative z-10">
         {currentPage === 'home' ? (
           <>
@@ -243,7 +237,6 @@ function App() {
           <CoursePage course={selectedCourse} onBack={handleBackToHome} />
         ) : null}
       </main>
-
       <Footer />
       <ChatBubble />
     </div>
