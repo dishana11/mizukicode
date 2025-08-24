@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 
-export const ChatBubble: React.FC = () => {
+const ChatBubble: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -104,3 +104,5 @@ export const ChatBubble: React.FC = () => {
     </>
   );
 };
+
+export default ChatBubble;
