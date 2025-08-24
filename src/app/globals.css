@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --accent-primary: #9d1c2b;
+    --accent-secondary: #821624;
+    --accent-tertiary: #66111b;
+    --accent-bg-primary: #1f1317;
+    --accent-bg-secondary: #2a151d;
+    --accent-interactive-primary: #9d1c2b;
+    --font-geist-sans: "Geist", sans-serif;
+  }
+
+  .dark.bg-gradient-theme {
+    background: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), radial-gradient(68% 58% at 50% 50%, #c81e3a 0%, #a51d35 16%, #7d1a2f 32%, #591828 46%, #3c1722 60%, #2a151d 72%, #1f1317 84%, #141013 94%, #0a0a0a 100%);
+  }
+
+  .bg-minimal-theme {
+    background: #0a0a0a;
+    background-image: radial-gradient(circle at 25% 25%, rgba(157, 28, 43, 0.045) 0%, transparent 50%);
+  }
+
+  .accent-glow-soft {
+    box-shadow: 0 0 10px rgba(157, 28, 43, 0.28);
+  }
+
+  .accent-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .accent-chip-active:hover {
+    background: var(--accent-bg-primary);
+    border-color: var(--accent-interactive-primary);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+  }
+
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
